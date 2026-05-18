@@ -1,38 +1,38 @@
-import React from 'react'
-import NavBar from './components/NavBar'
-import Hero from './components/Hero'
-import About from './components/About'
-import Products from './components/Products'
-import WhyChooseUs from './components/WhyChooseUs'
-import TestimonialsGallery from './components/TestimonialsGallery'
-import Footer from './components/Footer'
+import { Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import { LoginPage, RegisterPage } from "./pages/AuthPages";
+import ContactPage from "./pages/ContactPage";
+import HomePage from "./pages/HomePage";
+import NotFoundPage from "./pages/NotFoundPage";
+import PetDetailsPage from "./pages/PetDetailsPage";
+import PetsPage from "./pages/PetsPage";
+import ProfilePage from "./pages/ProfilePage";
+import WishlistPage from "./pages/WishlistPage";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 const App = () => {
   return (
-    <div>
-        <NavBar />
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="pets" element={<PetsPage />} />
+        <Route path="pets/:id" element={<PetDetailsPage />} />
+        <Route path="wishlist" element={<WishlistPage />} />
+        <Route path="contact" element={<ContactPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route
+          path="profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
+  );
+};
 
-        <div id="home">
-        <Hero />
-        </div>
-        <div id="about">
-        <About />
-        </div>
-        <div id="products">
-        <Products />
-        </div>
-        <div id="service">
-        <WhyChooseUs />
-        </div>
-
-        <TestimonialsGallery />
-        <div id="contact">
-        <Footer />
-        </div>
-
-
-    </div>
-  )
-}
-
-export default App
+export default App;

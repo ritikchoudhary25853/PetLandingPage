@@ -1,25 +1,19 @@
-import React from 'react'
+import RatingStars from "./RatingStars";
 
-const Testimonial = ({img, name}) => {
+const Testimonial = ({ img, name, role, quote, rating }) => {
   return (
-      <div className="bg-white p-6 rounded-xl shadow-md relative">
-      <p className="text-gray-600 text-sm leading-relaxed">
-        “Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam.”
-      </p>
-
-      <div className="flex items-center gap-3 mt-4">
-        <img
-          src={img}
-          className="w-12 h-12 rounded-full object-cover border-2 border-cyan-400"
-        />
+    <article className="h-full rounded-3xl bg-white p-6 text-left shadow-sm dark:bg-slate-900">
+      <p className="text-slate-600 dark:text-slate-300">"{quote}"</p>
+      <div className="mt-6 flex items-center gap-3">
+        <img src={img} alt={name} className="h-12 w-12 rounded-full border-2 border-cyan-400 object-cover" />
         <div>
-          <p className="font-semibold text-gray-800">{name}</p>
-          <div className="text-yellow-400 text-sm">★★★★★</div>
+          <p className="font-black text-slate-900 dark:text-white">{name}</p>
+          <p className="text-xs text-slate-500">{role}</p>
+          <RatingStars value={rating} size={14} />
         </div>
       </div>
-    </div>
-  )
-}
+    </article>
+  );
+};
 
-export default Testimonial
+export default Testimonial;

@@ -1,95 +1,65 @@
-import React from 'react'
-import Testimonial from './Testimonial';
+import { useState } from "react";
+import { ChevronLeft, ChevronRight, PawPrint } from "lucide-react";
+import { AnimatePresence, motion as Motion } from "framer-motion";
+import Testimonial from "./Testimonial";
+import { testimonials } from "../data/testimonials";
 import d1 from "../assets/d1.png";
 import d3 from "../assets/d3.png";
 import d4 from "../assets/d4.png";
 
+const gallery = [
+  d1,
+  "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=700&q=80",
+  d3,
+  d4,
+];
+
 const TestimonialsGallery = () => {
+  const [active, setActive] = useState(0);
+  const testimonial = testimonials[active];
 
-    const testimonials = [
-    {
-      name: "Bessie Cooper",
-      img: "https://randomuser.me/api/portraits/women/1.jpg",
-    },
-    {
-      name: "Bessie Cooper",
-      img: "https://randomuser.me/api/portraits/men/2.jpg",
-    },
-    {
-      name: "Bessie Cooper",
-      img: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-  ];
-
-  const gallery = [
-    d1,
-    "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=400",
-    d3,
-    d4,
-  ];
+  const next = () => setActive((current) => (current + 1) % testimonials.length);
+  const previous = () => setActive((current) => (current - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <div className="w-full">
-      {/* TESTIMONIALS */}
-      <div className="bg-[#dbe8d3] py-16 text-center">
-        <p className="text-gray-500 mb-2"> 🐾 Customer Testimonials</p>
-        <p className="text-4xl font-extrabold text-gray-800">
-          What <span className="text-cyan-500">Our Clients</span> Say
-        </p>
+    <section className="bg-[#dbe8d3] py-20 dark:bg-slate-950">
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <div className="mb-3 inline-flex items-center gap-2 text-sm font-bold text-emerald-700 dark:text-emerald-400">
+              <PawPrint size={18} />
+              Customer testimonials
+            </div>
+            <h2 className="text-3xl font-black text-slate-900 dark:text-white md:text-5xl">
+              What adopters say
+            </h2>
+            <p className="mt-4 max-w-xl text-slate-600 dark:text-slate-300">
+              A lightweight Framer Motion slider with real controls, keyboard-friendly buttons, and persistent layout.
+            </p>
+            <div className="mt-6 flex gap-2">
+              <button type="button" onClick={previous} className="grid h-11 w-11 place-items-center rounded-full bg-white text-slate-800 shadow-sm dark:bg-slate-900 dark:text-white" aria-label="Previous testimonial">
+                <ChevronLeft size={20} />
+              </button>
+              <button type="button" onClick={next} className="grid h-11 w-11 place-items-center rounded-full bg-white text-slate-800 shadow-sm dark:bg-slate-900 dark:text-white" aria-label="Next testimonial">
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          </div>
+          <AnimatePresence mode="wait">
+            <Motion.div key={testimonial.name} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.25 }}>
+              <Testimonial {...testimonial} />
+            </Motion.div>
+          </AnimatePresence>
+        </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mt-10 w-[90%] mx-auto">
-          {testimonials.map((t, i) => (
-            <Testimonial key={i} {...t} />
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {gallery.map((img, index) => (
+            <img key={index} src={img} alt={`Happy pet gallery ${index + 1}`} className="h-64 w-full rounded-3xl object-cover shadow-sm" loading="lazy" />
           ))}
         </div>
-        
-        <div className='mt-4'>
-        <button className="mt-10 bg-cyan-500 text-white px-6 py-3 rounded hover:bg-cyan-600">
-          View More
-        </button>
-         </div>
-
       </div>
+    </section>
+  );
+};
 
-      {/* GALLERY */}
-      <div className="bg-white py-16">
-        <div className="w-[90%] max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <p className="text-green-500 mb-2"> 🐾 Our Post Gallery</p>
-              <p className="text-4xl font-extrabold text-gray-800">
-                <span className="text-cyan-500">Looking</span> and
-                <br /> Smelling Great
-              </p>
-            </div>
-
-            <p className="text-gray-600">
-              Welcome to Our Post Gallery, where creativity meets inspiration.
-              Explore a vibrant collection of artwork and stories.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-6 mt-10">
-            {gallery.map((img, i) => (
-              <img
-                key={i}
-                src={img}
-                className="rounded-xl h-64 w-full object-cover"
-              />
-            ))}
-          </div>
-
-            {/* dots */}
-          <div className="flex justify-center gap-2 mt-6">
-            <div className="w-6 h-1 bg-cyan-500 rounded"></div>
-            <div className="w-2 h-1 bg-gray-300 rounded"></div>
-            <div className="w-2 h-1 bg-gray-300 rounded"></div>
-            <div className="w-2 h-1 bg-gray-300 rounded"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export default TestimonialsGallery
+export default TestimonialsGallery;

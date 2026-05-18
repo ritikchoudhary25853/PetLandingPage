@@ -1,100 +1,58 @@
-import React from 'react'
+import { Check, Minus, PawPrint } from "lucide-react";
 import logo from "../assets/Logo.png";
-import Check from "../assets/green tik.png";
-import Cross from "../assets/crosss.png";
+
+const rows = [
+  "Ethical and cruelty-free",
+  "Vet-reviewed profiles",
+  "Transparent adoption fees",
+  "Post-adoption support",
+  "Sustainable care partners",
+];
 
 const WhyChooseUs = () => {
-
-  const headers = [
-    "Brands",
-    "Ethical and Cruelty-Free",
-    "Vet-Approved Formulas",
-    "100% Natural Ingredients",
-    "Customer Satisfaction",
-    "Sustainable and Eco-Friendly",
-  ];
-
   return (
-    <div className='w-full py-16 px-4 md:px-10'>
-
-      {/* TOP SECTION */}
-      <div className="flex items-center justify-center lg:justify-start gap-2 text-green-500 font-semibold mb-3">
-            🐾 <span>Benefits with Us</span>
+    <section className="bg-white py-20 dark:bg-slate-900">
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
+        <div className="mb-10 grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div>
+            <div className="mb-3 inline-flex items-center gap-2 text-sm font-bold text-emerald-600">
+              <PawPrint size={18} />
+              Benefits with us
+            </div>
+            <h2 className="text-3xl font-black text-slate-900 dark:text-white md:text-5xl">
+              Why choose PawPal
+            </h2>
           </div>
+          <p className="max-w-3xl text-base leading-8 text-slate-600 dark:text-slate-300">
+            Choosing us means prioritizing your pet's health with high-quality care standards, thoughtful matching, and a cleaner adoption workflow for families and coordinators.
+          </p>
+        </div>
 
-      <div className='flex flex-col md:flex-row items-center justify-between gap-6'>
-        
-        <p className='text-3xl md:text-5xl font-extrabold text-center md:text-left'>
-          Why <span className='text-blue-400'>Choose</span> Us
-        </p>
-
-        <p className='max-w-xl text-gray-600 text-center md:text-left'>
-          Choosing us means prioritizing your pet's health with high-quality, all natural products. 
-          Our passion for pet care drives us to provide exceptional services and trusted solutions 
-          for your furry family members.
-        </p>
-
-      </div>
-
-      {/* TABLE */}
-      <div className="mt-12 border rounded-2xl overflow-hidden">
-
-        {/* Scroll Wrapper for mobile */}
-        <div className="overflow-x-auto">
-          
-          <div className="min-w-[700px]">
-
-            {/* HEADER ROW */}
-            <div className="grid grid-cols-6 bg-white text-gray-700 font-semibold text-center py-4 px-2">
-              {headers.map((item, index) => (
-                <div key={index} className="text-xs md:text-sm lg:text-base px-2">
-                  {item}
-                </div>
-              ))}
-            </div>
-
-            {/* OUR BRAND ROW */}
-            <div className="grid grid-cols-6 bg-[#9cc7d3] items-center text-center py-6">
-              
-              <div className="flex justify-center">
-                <div className="bg-white w-12 h-12 md:w-14 md:h-14 rounded-lg flex items-center justify-center shadow">
-                  <img src={logo} alt="logo" className="w-8 h-8 object-contain" />
-                </div>
-              </div>
-
-              {[1, 2, 3, 4, 5].map((_, i) => (
-                <div key={i} className="flex justify-center">
-                  <div className="bg-white w-12 h-12 md:w-14 md:h-14 rounded-lg flex items-center justify-center shadow">
-                    <img src={Check} alt="check" className="w-5 h-5 object-contain" />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* OTHER BRAND ROW */}
-            <div className="grid grid-cols-6 bg-[#bfe3a8] items-center text-center py-6">
-              
-              <div className="flex justify-center">
-                <div className="bg-white px-2 py-1 md:px-3 md:py-2 rounded-md text-gray-700 text-xs md:text-sm font-medium shadow">
-                  Other Brand
-                </div>
-              </div>
-
-              {[1, 2, 3, 4, 5].map((_, i) => (
-                <div key={i} className="flex justify-center">
-                  <div className="bg-white w-12 h-12 md:w-14 md:h-14 rounded-lg flex items-center justify-center shadow">
-                    <img src={Cross} alt="cross" className="w-5 h-5 object-contain" />
-                  </div>
-                </div>
-              ))}
-            </div>
-
+        <div className="overflow-hidden rounded-3xl border border-slate-100 shadow-sm dark:border-slate-800">
+          <div className="grid grid-cols-[1.3fr_1fr_1fr] bg-slate-50 text-sm font-black text-slate-700 dark:bg-slate-950 dark:text-slate-200">
+            <div className="p-4">Feature</div>
+            <div className="p-4 text-center">PawPal</div>
+            <div className="p-4 text-center">Typical listing</div>
           </div>
+          {rows.map((row, index) => (
+            <div key={row} className={`grid grid-cols-[1.3fr_1fr_1fr] items-center ${index % 2 ? "bg-white dark:bg-slate-900" : "bg-[#ecf9de] dark:bg-slate-950"}`}>
+              <div className="p-4 font-semibold text-slate-700 dark:text-slate-200">{row}</div>
+              <div className="flex justify-center p-4">
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-emerald-600 shadow-sm dark:bg-slate-800">
+                  {index === 0 ? <img src={logo} alt="PawPal" className="h-7 w-7 object-contain" /> : <Check size={20} />}
+                </span>
+              </div>
+              <div className="flex justify-center p-4">
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-slate-400 shadow-sm dark:bg-slate-800">
+                  <Minus size={20} />
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+    </section>
+  );
+};
 
-    </div>
-  )
-}
-
-export default WhyChooseUs
+export default WhyChooseUs;

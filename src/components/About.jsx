@@ -1,65 +1,51 @@
-import React from 'react'
+import { CheckCircle2, PawPrint } from "lucide-react";
+import { Link } from "react-router-dom";
 import MaskGroup from "../assets/Maskgroup.png";
 
 const About = () => {
   return (
-    <div className="w-full min-h-screen bg-[#f5f7f6] py-12 flex justify-center">
-      
-      <div className="w-[95%] max-w-7xl flex flex-col lg:flex-row items-center gap-10">
-
-        {/* LEFT IMAGE */}
-        <div className="relative flex justify-center">
-          <img
-            src={MaskGroup}
-            alt="pet"
-            className="w-64 sm:w-80 md:w-[400px] h-auto object-cover rounded-[20%] shadow-lg"
-          />
-
-          {/* Icon */}
-          <div className="absolute bottom-[-15px] left-[-15px] bg-green-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-white text-xl shadow-lg">
-            🦴
+    <section id="about" className="bg-[#f7fbf5] py-20 dark:bg-slate-950">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 md:px-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="relative">
+          <img src={MaskGroup} alt="Pet care specialist holding a dog" className="mx-auto w-full max-w-md rounded-[2rem] object-cover shadow-2xl" />
+          <div className="absolute -bottom-5 left-4 flex items-center gap-3 rounded-2xl bg-white p-4 shadow-xl dark:bg-slate-900">
+            <span className="grid h-12 w-12 place-items-center rounded-full bg-emerald-100 text-emerald-600">
+              <PawPrint size={24} />
+            </span>
+            <div>
+              <p className="text-sm font-black text-slate-900 dark:text-white">Rescue-first</p>
+              <p className="text-xs text-slate-500">Ethical matching standards</p>
+            </div>
           </div>
         </div>
 
-        {/* RIGHT CONTENT */}
-        <div className="max-w-2xl text-center lg:text-left">
-          
-          {/* Tag */}
-          <div className="flex items-center justify-center lg:justify-start gap-2 text-green-500 font-semibold mb-3">
-            🐾 <span>About Us</span>
+        <div>
+          <div className="mb-3 inline-flex items-center gap-2 text-sm font-bold text-emerald-600">
+            <PawPrint size={18} />
+            About PawPal
           </div>
-
-          {/* Heading */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight">
-            Dedicated to <span className="text-cyan-500">Your Pet’s</span>
-            <br /> Well-Being Always
+          <h2 className="max-w-3xl text-3xl font-black leading-tight text-slate-900 dark:text-white sm:text-5xl">
+            Dedicated to your pet's well-being, from first search to forever home.
           </h2>
-
-          {/* Description */}
-          <p className="text-gray-600 mt-4 text-base md:text-lg leading-relaxed">
-            We recognize that pets hold a special place in our hearts. Our mission is to deliver premium, all-natural products that enhance their health and joy.
+          <p className="mt-5 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-300">
+            We combine adoption tools, realistic pet profiles, wishlist persistence, and clear care guidance so families can make thoughtful decisions.
+            Every profile includes lifestyle notes, adoption fees, health status, and next-step availability.
           </p>
-
-          {/* FEATURES */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 text-gray-700 text-sm md:text-base">
-            <div>✔ 24/7 support</div>
-            <div>✔ Lowest Price</div>
-            <div>✔ Quick Delivery</div>
-            <div>✔ Community Focus</div>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            {["Health-focused profiles", "LocalStorage wishlist", "Guided adoption process", "Responsive care support"].map((item) => (
+              <div key={item} className="flex items-center gap-3 rounded-2xl bg-white p-4 font-bold text-slate-700 shadow-sm dark:bg-slate-900 dark:text-slate-200">
+                <CheckCircle2 size={20} className="text-emerald-500" />
+                {item}
+              </div>
+            ))}
           </div>
-
-          {/* BUTTON */}
-          <div className='mt-6'>
-            <button className="mt-4 bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-full shadow-md w-full sm:w-auto transition">
-              View About Us Page
-            </button>
-          </div>
-
+          <Link to="/pets" className="mt-8 inline-flex rounded-full bg-slate-900 px-6 py-3 font-bold text-white no-underline transition hover:bg-cyan-600 dark:bg-cyan-500">
+            Browse adoptable pets
+          </Link>
         </div>
-
       </div>
-    </div>
-  )
-}
+    </section>
+  );
+};
 
 export default About;
